@@ -7,4 +7,4 @@
 
 #### Build and deploy 
 * Command to build & execute project: mvn clean install exec:java
-* Main access point ie http://localhost:8080/pycozza
+* Main access point is: http://localhost:8080/pycozza
