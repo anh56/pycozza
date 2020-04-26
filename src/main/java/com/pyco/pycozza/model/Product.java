@@ -30,6 +30,7 @@ public class Product {
     @Setter
     private String imgLink;
 
+    /*TODO: make crust and size optional since only pizza have these 2 attributes*/
     @Getter
     @Setter
     private String crust;

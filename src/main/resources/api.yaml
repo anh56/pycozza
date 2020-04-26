@@ -1,0 +1,54 @@
+openapi: 3.0.0
+info:
+  description: API specification for Pycozza application
+  version: v3
+  title: Pycozza API
+
+servers:
+  - url: http://localhost:8080/pycozza
+
+paths:
+  /users:
+    get:
+      description: Returns a list of users
+      parameters:
+        - name: limit
+          in: query
+          description: Limits the number of items on a page
+          schema:
+            type: integer
+        - name: offset
+          in: query
+          description: Specifies the page number of the users to be displayed
+          schema:
+            type: integer
+      #  ----- Added lines  ----------------------------------------
+      responses:
+        '200':
+          description: Successfully returned a list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - email
+                  properties:
+                    name:
+                      type: string
+                    phone:
+                      type: string
+                    address:
+                      type: integer
+                    email:
+                      type: string
+      '400':
+        description: Invalid request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
