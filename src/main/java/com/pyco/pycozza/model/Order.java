@@ -17,13 +17,15 @@ public class Order {
 
     @Id
     @Getter
-    private ObjectId id;
+    private ObjectId _id;
+
+    @Getter
+    private int id;
 
 
     @Getter
     @Setter
-    @DBRef
-    private User user ;
+    private int userId ;
 
     @Getter
     @Setter
@@ -36,11 +38,12 @@ public class Order {
 
     @Getter
     @Setter
-    private Date createdDate ;
+    private Date createdDate = new Date() ;
 
     @Getter
     @Setter
     private int totalPrice;
+
 
 
 

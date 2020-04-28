@@ -15,7 +15,10 @@ public class Product {
 
     @Id
     @Getter
-    private ObjectId id;
+    private ObjectId _id;
+
+    @Getter
+    private int id;
 
     @Getter
     @Setter
@@ -23,8 +26,7 @@ public class Product {
 
     @Getter
     @Setter
-    @DBRef
-    private Category category;
+    private int categoryId;
 
     @Getter
     @Setter
@@ -47,4 +49,24 @@ public class Product {
     @Setter
     private int price;
 
+    public Product(int id, String name, int categoryId, String imgLink, String crust, String size, String description, int price) {
+        this.id = id;
+        this.name = name;
+        this.categoryId = categoryId;
+        this.imgLink = imgLink;
+        this.crust = crust;
+        this.size = size;
+        this.description = description;
+        this.price = price;
+    }
+
+    public Product(int id, String name, int categoryId, String imgLink, int price) {
+        this.id = id;
+        this.name = name;
+        this.categoryId = categoryId;
+        this.imgLink = imgLink;
+        this.price = price;
+    }
+
+    public Product(){}
 }

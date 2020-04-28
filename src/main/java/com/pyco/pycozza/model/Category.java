@@ -15,10 +15,19 @@ public class Category {
 
     @Id
     @Getter
-    private ObjectId id;
+    private ObjectId _id;
+
+    @Getter
+    private int id;
 
     @Getter
     @Setter
     private String name;
 
+    public Category(int id,String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Category(){}
 }
