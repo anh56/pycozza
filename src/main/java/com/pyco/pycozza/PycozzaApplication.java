@@ -10,6 +10,10 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,9 @@ public class PycozzaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PycozzaApplication.class, args);
+
+
+
 //
 //        MongoClient mongo = new MongoClient("localhost", 27017);
 //        System.out.println("Connected to the database successfully");
@@ -117,6 +124,16 @@ public class PycozzaApplication {
 //                "\t\"total\": 199}");
 //        ordersCollection.insertOne(mockOrder);
 
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("").allowedOrigins("http://localhost:3000");
+            }
+        };
     }
 
 }

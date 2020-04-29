@@ -33,13 +33,6 @@ public class ProductController implements ProductApi{
     @Autowired
     private ModelMapper modelMapper;
 
-
-//    @GetMapping("/all")
-//    public List<Product> getAllProduct(){
-//        return productService.getAllProduct();
-//    }
-
-
     @GetMapping("/v1/list")
     public Page<Product> getProductList(@RequestParam(defaultValue = "1") int page,
                                         @RequestParam(defaultValue = "5") int size){
