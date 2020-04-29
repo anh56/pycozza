@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public interface ProductRepository extends MongoRepository<Product, ObjectId> {
+public interface ProductRepository extends MongoRepository<Product, Integer> {
     List<Product> findByCategoryId(int categoryId);
     Product findById(int id);
 }

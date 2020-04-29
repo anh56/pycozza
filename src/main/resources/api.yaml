@@ -8,189 +8,221 @@ servers:
   - url: http://localhost:8080/pycozza
 
 paths:
-  /user:
-    get:
-      description: Returns a list of users
-      parameters:
-        - name: limit
-          in: query
-          description: Limits the number of items on a page
-          schema:
-            type: integer
-        - name: offset
-          in: query
-          description: Specifies the page number of the users to be displayed
-          schema:
-            type: integer
-      #  ----- Added lines  ----------------------------------------
-      responses:
-        '200':
-          description: Successfully returned a list of users
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - email
-                  properties:
-                    name:
-                      type: string
-                    phone:
-                      type: string
-                    address:
-                      type: integer
-                    email:
-                      type: string
-      '400':
-        description: Invalid request
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-
-    post:
-      description: add a new user
-        parameters:
-          - name: name
-            in: query
-            description: name of user
-            schema:
-              type: String
-          - name: phone
-            in: query
-            description: phone number of user
-            schema:
-              type: integer
-          - name: email
-            in: query
-            description: email of user
-            schema:
-              type: String
-          - name: address
-            in: query
-            description: address number of user
-            schema:
-              type: String
-      responses:
-        '200':
-          description: Successfully added a user
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - email
-                  properties:
-                    name:
-                      type: string
-                    phone:
-                      type: string
-                    address:
-                      type: integer
-                    email:
-                      type: string
-      '400':
-        description: Invalid request
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-
-
-
-
-
-
-
-
-  /product:
-    get:
-      description: Returns a list of product
-      parameters:
-        - name: limit
-          in: query
-          description: Limits the number of items on a page
-          schema:
-            type: integer
-        - name: offset
-          in: query
-          description: Specifies the page number of the products to be displayed
-          schema:
-            type: integer
-      #  ----- Added lines  ----------------------------------------
-      responses:
-        '200':
-          description: Successfully returned a list of product
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - name
-                    - imgLink
-                    - price
-                  properties:
-                    name:
-                      type: string
-                    imgLink:
-                      type: string
-                    description:
-                      type: string
-                    price:
-                      type: int
-      '400':
-        description: Invalid request
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-
-
-
-  /category:
-    get:
-      description: Returns a list of category
-      #  ----- Added lines  ----------------------------------------
-      responses:
-        '200':
-          description: Successfully returned a list of category
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - name
-                  properties:
-                    name:
-                      type: string
-      '400':
-        description: Invalid request
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-
-
+#  /user:
+#    get:
+#      operationId: getUserList
+#      description: Returns a list of users
+#      parameters:
+#        - name: limit
+#          in: query
+#          description: Limits the number of items on a page
+#          schema:
+#            type: integer
+#        - name: offset
+#          in: query
+#          description: Specifies the page number of the users to be displayed
+#          schema:
+#            type: integer
+#      #  ----- Added lines  ----------------------------------------
+#      responses:
+#        '200':
+#          description: Successfully returned a list of users
+#          content:
+#            application/json:
+#              schema:
+#                type: array
+#                items:
+#                  type: object
+#                  required:
+#                    - email
+#                  properties:
+#                    name:
+#                      type: string
+#                    phone:
+#                      type: string
+#                    address:
+#                      type: integer
+#                    email:
+#                      type: string
+#      '400':
+#        description: Invalid request
+#        content:
+#          application/json:
+#            schema:
+#              type: object
+#              properties:
+#                message:
+#                  type: string
+#
+#    post:
+#      description: add a new user
+#        parameters:
+#          - name: name
+#            in: query
+#            description: name of user
+#            schema:
+#              type: String
+#          - name: phone
+#            in: query
+#            description: phone number of user
+#            schema:
+#              type: integer
+#          - name: email
+#            in: query
+#            description: email of user
+#            schema:
+#              type: String
+#          - name: address
+#            in: query
+#            description: address number of user
+#            schema:
+#              type: String
+#      responses:
+#        '200':
+#          description: Successfully added a user
+#          content:
+#            application/json:
+#              schema:
+#                type: array
+#                items:
+#                  type: object
+#                  required:
+#                    - email
+#                  properties:
+#                    name:
+#                      type: string
+#                    phone:
+#                      type: string
+#                    address:
+#                      type: integer
+#                    email:
+#                      type: string
+#      '400':
+#        description: Invalid request
+#        content:
+#          application/json:
+#            schema:
+#              type: object
+#              properties:
+#                message:
+#                  type: string
+#
+#
+#
+#
+#
+#
+#
+#
+#  /product:
+#    get:
+#      description: Returns a list of product
+#      parameters:
+#        - name: limit
+#          in: query
+#          description: Limits the number of items on a page
+#          schema:
+#            type: integer
+#        - name: offset
+#          in: query
+#          description: Specifies the page number of the products to be displayed
+#          schema:
+#            type: integer
+#      #  ----- Added lines  ----------------------------------------
+#      responses:
+#        '200':
+#          description: Successfully returned a list of product
+#          content:
+#            application/json:
+#              schema:
+#                type: array
+#                items:
+#                  type: object
+#                  required:
+#                    - name
+#                    - imgLink
+#                    - price
+#                  properties:
+#                    name:
+#                      type: string
+#                    imgLink:
+#                      type: string
+#                    description:
+#                      type: string
+#                    price:
+#                      type: int
+#      '400':
+#        description: Invalid request
+#        content:
+#          application/json:
+#            schema:
+#              type: object
+#              properties:
+#                message:
+#                  type: string
+#
+#
+#
+#  /category:
+#    get:
+#      operationId: getCategoryList
+#      description: Returns a list of category
+#      #  ----- Added lines  ----------------------------------------
+#      responses:
+#        '200':
+#          description: Successfully returned a list of category
+#          content:
+#            application/json:
+#              schema:
+#                type: array
+#                items:
+#                  type: object
+#                  required:
+#                    - name
+#                  properties:
+#                    name:
+#                      type: string
+#
+#
+#components:
+#  schemas:
+#    ObjectCreationSuccessResponse:
+#      type: object
+#      properties:
+#        id:
+#          type: string
+#        responseCode:
+#          type: integer
+#
+#    ApiError:
+#      type: object
+#      properties:
+#        faults:
+#          type: array
+#          items:
+#            $ref: "#/components/schemas/Fault"
+#        responseCode:
+#          type: integer
+#    Fault:
+#      type: object
+#      properties:
+#        internalMessage:
+#          type: string
+#        code:
+#          type: integer
+#        userMessage:
+#          type: string
+#
+#  examples:
+#    InternalServerError:
+#      value:
+#        responseCode: 500
+#        faults:
+#          -:
+#          userMessage: There're some error when processing this request. Please retry again or contact the site administrator for supporting
+#          internalMessage: Internal server error
+#          code: 1000
+#          responseCode: 500
 
 
 

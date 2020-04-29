@@ -22,22 +22,22 @@ public class PycozzaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PycozzaApplication.class, args);
-
-        MongoClient mongo = new MongoClient("localhost", 27017);
-        System.out.println("Connected to the database successfully");
-        MongoDatabase database = mongo.getDatabase("pycozza");
-
-        try {
-            database.createCollection("users");
-            database.createCollection("categories");
-            database.createCollection("products");
-            database.createCollection("orders");
-            System.out.println("Collections users, categories, products, orders created successfully");
-        } catch (MongoCommandException e) {
-            System.err.println("Collections Exists");
-        }
-
-
+//
+//        MongoClient mongo = new MongoClient("localhost", 27017);
+//        System.out.println("Connected to the database successfully");
+//        MongoDatabase database = mongo.getDatabase("pycozza");
+//
+//        try {
+//            database.createCollection("users");
+//            database.createCollection("categories");
+//            database.createCollection("products");
+//            database.createCollection("orders");
+//            System.out.println("Collections users, categories, products, orders created successfully");
+//        } catch (MongoCommandException e) {
+//            System.err.println("Collections Exists");
+//        }
+//
+//
 //        MongoCollection<Document> usersCollection = database.getCollection("users");
 //        MongoCollection<Document> categoriesCollection = database.getCollection("categories");
 //        MongoCollection<Document> productsCollection = database.getCollection("products");

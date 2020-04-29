@@ -32,10 +32,10 @@ public class ProductService {
 
 
     public void addNewProduct( int id, String name, int categoryId, String imgLink, String crust,
-                                        String size, int price, String description) {
+                                        String size, int price, String description, int maxPrice) {
         if( productRepository.findById(id) == null){
             if (crust != null && size != null ){
-                productRepository.save(new Product(id,  name,  categoryId,  imgLink,  crust,  size,  description,  price));
+                productRepository.save(new Product(id,  name,  categoryId,  imgLink,  crust,  size,  description,  price, maxPrice));
             }
             else productRepository.save(new Product(id, name, categoryId, imgLink, price));
         }

@@ -32,7 +32,6 @@ public class Product {
     @Setter
     private String imgLink;
 
-    /*TODO: make crust and size optional since only pizza have these 2 attributes*/
     @Getter
     @Setter
     private String crust;
@@ -49,7 +48,11 @@ public class Product {
     @Setter
     private int price;
 
-    public Product(int id, String name, int categoryId, String imgLink, String crust, String size, String description, int price) {
+    @Getter
+    @Setter
+    private int maxPrice;
+
+    public Product(int id, String name, int categoryId, String imgLink, String crust, String size, String description, int price, int maxPrice) {
         this.id = id;
         this.name = name;
         this.categoryId = categoryId;
@@ -58,7 +61,9 @@ public class Product {
         this.size = size;
         this.description = description;
         this.price = price;
+        this.maxPrice = maxPrice;
     }
+
 
     public Product(int id, String name, int categoryId, String imgLink, int price) {
         this.id = id;
