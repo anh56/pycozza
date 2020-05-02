@@ -21,25 +21,14 @@ public class Order {
     private ObjectId _id;
 
     @Getter
-    private int id;
-
-
-    @Getter
-    @Setter
-    private int userId ;
-
-    @Getter
     @Setter
     @DBRef
     private Product product ;
 
     @Getter
     @Setter
-    private int quantity ;
-
-    @Getter
-    @Setter
-    private Date createdDate = new Date() ;
+    @DBRef
+    private User user ;
 
     @Getter
     @Setter

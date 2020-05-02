@@ -27,8 +27,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
-//    public void addUser() {
-//        User user = new User();
-//        return userRepository.save(user);
-//    }
+    public User createUser(User user){
+        return userRepository.save(user);
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

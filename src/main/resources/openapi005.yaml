@@ -1,112 +1,106 @@
 openapi: 3.0.0
-# Added by API Auto Mocking Plugin
-servers:
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/anh56/pycozza/
-  - url: http://ec2-52-221-224-159.ap-southeast-1.compute.amazonaws.com:8080/pycozza/
-
 info:
-  description: This is API for pizza ordering app for Pyco
-  version: "0.0.5"
   title: Simple Inventory API
+  description: This is API for pizza ordering app for Pyco
   contact:
     email: 01ntanh9a3@gmail.com
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.5
+servers:
+- url: https://virtserver.swaggerhub.com/anh56/pycozza/
+  description: SwaggerHub API Auto Mocking
+- url: http://ec2-52-221-224-159.ap-southeast-1.compute.amazonaws.com:8080/pycozza/
 tags:
-  - name: product
-  - name: category
-  - name: user
-  - name: order
+- name: product
+- name: category
+- name: user
+- name: order
 paths:
   /product:
     post:
       summary: adds a product
-      operationId: addProduct
       description: Adds an item to the system
+      operationId: addProduct
       requestBody:
         description: Create product
         content:
-          'application/json':
+          application/json:
             schema:
               $ref: '#/components/schemas/CreateProductRequest'
       responses:
-        '201':
+        "201":
           description: item created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectCreationSuccessResponse'
-        '400':
-          description: 'invalid input, object invalid'
-        '409':
+        "400":
+          description: invalid input, object invalid
+        "409":
           description: an existing item already exists
-
-
-  '/product/{categoryId}':
+  /product/{categoryId}:
     get:
       tags:
-        - product
+      - product
       summary: get all products by category
       operationId: getProductByCategoryId
       parameters:
-        - name: categoryId
-          in: path
-          schema:
-            type: integer
-            default: 1
-          required: true
+      - name: categoryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          default: 1
       responses:
-        '200':
+        "200":
           description: all products belong to a category
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductListResponse'
-        '400':
+        "400":
           description: bad input parameter
-
-
   /category:
     get:
       tags:
-        - category
+      - category
       summary: get category
       operationId: getCategory
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CategoryListResponse'
-        '400':
+        "400":
           description: bad input parameter
-
   /user/signup:
     post:
       summary: adds a user
-      operationId: addUser
       description: Adds a user to the system
+      operationId: addUser
       requestBody:
         description: Create user
         content:
-          'application/json':
+          application/json:
             schema:
               $ref: '#/components/schemas/CreateUserRequest'
       responses:
-        '201':
+        "201":
           description: user created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectCreationSuccessResponse'
-        '400':
+        "400":
           description: invalid input, object invalid
-        '409':
+        "409":
           description: an existing user already exists
-
   /user/signin:
     post:
       tags:
@@ -129,44 +123,44 @@ paths:
         '400':
           description: bad input parameter
 
-
   /order/add:
     post:
       summary: adds an order
-      operationId: addOrder
       description: Adds an order to the system
+      operationId: addOrder
       requestBody:
         description: add an order
         content:
-          'application/json':
+          application/json:
             schema:
               $ref: '#/components/schemas/CreateOrderRequest'
       responses:
-        '201':
-          description: order created
+        "201":
+          description: user created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectCreationSuccessResponse'
-        '400':
-          description: 'invalid input, object invalid'
-        '409':
+        "400":
+          description: invalid input, object invalid
+        "409":
           description: an existing item already exists
-
-  '/order/{email}':
+  /order/{email}:
     get:
       tags:
-        - order
+      - order
       summary: get order
       operationId: getOrderHistory
       parameters:
-        - in: path
-          name: email
-          schema:
-            type: string
-          required: true
+      - name: email
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: search orders matching email
           content:
             application/json:
@@ -174,9 +168,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/OrderListResponse'
-        '400':
+        "400":
           description: bad input parameter
-
 components:
   schemas:
     UserListResponse:
@@ -186,14 +179,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserResponseModel'
-
     UserResponseModel:
-      type: object
       required:
-        - name
-        - email
-        - address
-        - phone
+      - address
+      - email
+      - name
+      - phone
+      type: object
       properties:
         name:
           type: string
@@ -202,7 +194,6 @@ components:
           type: string
         phone:
           type: string
-
     CategoryListResponse:
       type: object
       properties:
@@ -210,12 +201,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CategoryResponseModel'
-
     CategoryResponseModel:
-      type: object
       required:
-        - id
-        - name
+      - id
+      - name
+      type: object
       properties:
         id:
           type: integer
@@ -223,7 +213,6 @@ components:
         name:
           type: string
           example: Example Category
-
     ProductListResponse:
       type: object
       properties:
@@ -231,14 +220,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductResponseModel'
-
     ProductResponseModel:
-      type: object
       required:
-        - name
-        - categoryId
-        - imgLink
-        - price
+      - categoryId
+      - imgLink
+      - name
+      - price
+      type: object
       properties:
         id:
           type: integer
@@ -253,7 +241,6 @@ components:
           type: integer
         description:
           type: string
-
     OrderListResponse:
       type: object
       properties:
@@ -261,16 +248,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrderResponseModel'
-
     OrderResponseModel:
-      type: object
       required:
-        - cart
-        - totalPrice
-        - user
+      - cart
+      - totalPrice
+      - user
+      type: object
       properties:
         cart:
-          $ref: '#/components/schemas/ProductListResponse'
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductResponseModel'
         totalPrice:
           type: integer
         user:
@@ -289,7 +277,7 @@ components:
           $ref: '#/components/schemas/UserResponseModel'
         userEmail:
           type: string
-
+          example: abc
     CreateProductRequest:
       type: object
       properties:
@@ -304,8 +292,6 @@ components:
           type: integer
         description:
           type: string
-
-
     CreateUserRequest:
       type: object
       properties:
@@ -318,8 +304,6 @@ components:
         password:
           type: string
           format: password
-
-
     CheckUserRequest:
       type: object
       properties:
@@ -328,7 +312,6 @@ components:
         password:
           type: string
           format: password
-
     ObjectCreationSuccessResponse:
       type: object
       properties:
@@ -336,17 +319,15 @@ components:
           type: string
         status:
           type: integer
-
     ApiError:
       type: object
       properties:
         faults:
           type: array
           items:
-            $ref: "#/components/schemas/Fault"
+            $ref: '#/components/schemas/Fault'
         responseCode:
           type: integer
-
     Fault:
       type: object
       properties:

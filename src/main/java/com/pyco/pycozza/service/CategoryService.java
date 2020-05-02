@@ -21,19 +21,19 @@ public class CategoryService {
 //    public Category getCategoryById(int id){
 //        return categoryRepository.findById(id);
 //    }
-
-    public Category getCategoryByKey(String key){
-        return categoryRepository.findCategoriesByNameContaining(key);
-    }
-
-    public Category addNewCategory(int id, String name){
-        if (categoryRepository.findById(id) != null){
-            Category category = new Category(id, name);
-            return categoryRepository.save(category);
-        }
-        else return null;
-
-    }
+//
+//    public Category getCategoryByKey(String key){
+//        return categoryRepository.findCategoriesByNameContaining(key);
+//    }
+//
+//    public Category addNewCategory(int id, String name){
+//        if (categoryRepository.findById(id) != null){
+//            Category category = new Category(id, name);
+//            return categoryRepository.save(category);
+//        }
+//        else return null;
+//
+//    }
 
 
 

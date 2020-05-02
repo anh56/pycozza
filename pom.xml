@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.pyco</groupId>
     <artifactId>pycozza</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.6-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>pycozza</name>
     <description>Project for final exercise of the Modern Engineer Program</description>
@@ -155,7 +155,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/openapi005.yaml</inputSpec>
                             <generatorName>spring</generatorName>
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>

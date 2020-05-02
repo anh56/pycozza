@@ -25,6 +25,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductController implements ProductApi{
 
     @Autowired
@@ -58,28 +59,15 @@ public class ProductController implements ProductApi{
         productService.addNewProduct(id, name, categoryId, imgLink, crust, size ,price,description, maxPrice);
     }
 
-
     @Override
     public ResponseEntity<ObjectCreationSuccessResponse> addProduct(@Valid CreateProductRequest createProductRequest) {
         return null;
     }
 
     @Override
-    public ResponseEntity<ProductListResponse> getAllProduct() {
-        List<Product> productList = productService.getAllProduct();
-        return buildProductListResponse(productList);
-    }
-
-    @Override
     public ResponseEntity<ProductListResponse> getProductByCategoryId(Integer categoryId) {
         List<Product> productListByCategory = productService.getProductByCategory(categoryId);
         return buildProductListResponse(productListByCategory);
-    }
-
-    @Override
-    public ResponseEntity<ProductListResponse> getProductWithPagination(@Min(0) @Valid Integer page, @Min(0) @Max(50) @Valid Integer size) {
-        Page<Product> productList = productService.getProductList(page, size);
-        return buildProductListResponse((List<Product>) productList);
     }
 
     private ResponseEntity<ProductListResponse> buildProductListResponse(List<Product> productList){

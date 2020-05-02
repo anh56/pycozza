@@ -40,6 +40,6 @@ public class ProductService {
             else productRepository.save(new Product(id, name, categoryId, imgLink, price));
         }
         else System.out.println("product exists");
-
     }
+
 }
