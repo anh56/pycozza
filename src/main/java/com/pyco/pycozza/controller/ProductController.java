@@ -25,7 +25,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.HEAD, RequestMethod.OPTIONS})
 public class ProductController implements ProductApi{
 
     @Autowired

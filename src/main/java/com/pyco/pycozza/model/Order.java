@@ -23,12 +23,28 @@ public class Order {
     @Getter
     @Setter
     @DBRef
-    private Product product ;
+    private List<Product> product ;
 
     @Getter
     @Setter
     @DBRef
     private User user ;
+
+    @Getter
+    @Setter
+    private String note;
+
+    @Getter
+    @Setter
+    private String paymentMethod;
+
+    @Getter
+    @Setter
+    private String email;
+
+    @Getter
+    @Setter
+    private String orderTime;
 
     @Getter
     @Setter

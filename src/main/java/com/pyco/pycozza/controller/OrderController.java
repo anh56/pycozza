@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.HEAD, RequestMethod.OPTIONS})
 public class OrderController implements OrderApi{
     @Override
     public ResponseEntity<ObjectCreationSuccessResponse> addOrder(@Valid CreateOrderRequest createOrderRequest) {
@@ -27,7 +28,7 @@ public class OrderController implements OrderApi{
     @Override
     public ResponseEntity<List<OrderListResponse>> getOrderHistory(String email) {
         OrderListResponse orderListResponse = new OrderListResponse();
-        OrderResponseModel orderResponseModel = new OrderResponseModel();
+
         //implement set price, products, user
         return null;
     }

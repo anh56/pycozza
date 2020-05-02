@@ -183,11 +183,11 @@ components:
       required:
       - address
       - email
-      - name
+      - fullName
       - phone
       type: object
       properties:
-        name:
+        fullName:
           type: string
           example: Example User
         email:
@@ -274,13 +274,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductResponseModel'
+        email:
+          type: string
+        note:
+          type: string
+        orderUserInfomation:
+          $ref: '#/components/schemas/UserResponseModel'
+        paymentMethod:
+          type: string
         totalPrice:
           type: integer
-        user:
-          $ref: '#/components/schemas/UserResponseModel'
-        userEmail:
-          type: string
-          example: abc
+
     CreateProductRequest:
       type: object
       properties:
@@ -298,7 +302,7 @@ components:
     CreateUserRequest:
       type: object
       properties:
-        name:
+        fullName:
           type: string
         email:
           type: string

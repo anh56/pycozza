@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.HEAD, RequestMethod.OPTIONS})
 public class UserController implements UserApi {
 
     @Autowired
@@ -42,11 +42,11 @@ public class UserController implements UserApi {
         if (userByEmail != null){
             if(userByEmail.getPassword().equals(user.getPassword())){
                 UserResponseModel userResponse = modelMapper.map(userByEmail, UserResponseModel.class);
-                return new ResponseEntity<>(userResponse, HttpStatus.FOUND);
+                return new ResponseEntity<>(userResponse, HttpStatus.OK);
             }
-            else return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            else return new ResponseEntity<>(null, HttpStatus.OK);
         }
-        else return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        else return new ResponseEntity<>(null, HttpStatus.OK);
 
     }
 
@@ -55,9 +55,17 @@ public class UserController implements UserApi {
         User user = modelMapper.map(createUserRequest, User.class);
         User persistUser = userService.createUser(user);
         ObjectCreationSuccessResponse result = new ObjectCreationSuccessResponse();
-        result.setId(persistUser.getId().toString());
-        result.setStatus(HttpStatus.CREATED.value());
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        if (persistUser != null){
+            result.setId(persistUser.getId().toString());
+            result.setStatus(HttpStatus.CREATED.value());
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        else {
+            result.setId(null);
+            result.setStatus(HttpStatus.CONFLICT.value());
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+
     }
 
 }
