@@ -226,6 +226,7 @@ components:
       - imgLink
       - name
       - price
+      - maxPrice
       type: object
       properties:
         id:
@@ -238,6 +239,8 @@ components:
         imgLink:
           type: string
         price:
+          type: integer
+        maxPrice:
           type: integer
         description:
           type: string
