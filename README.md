@@ -6,7 +6,7 @@
 * The aim is to develop Restful APIs and gain more insight into Java Backend Programming.
 
 #### Build and deploy 
-* Command to build: mvn clean install 
-* Execute project: java -jar pycozza-0.0.6-SNAPSHOT.jar
+* Command to build: mvn clean install package
+* Execute project (in target folder after build): java -jar pycozza-0.0.6-SNAPSHOT.jar
 * Main access point is: https://localhost:8080/pycozza
 * The api can be called from: https://ec2-52-221-224-159.ap-southeast-1.compute.amazonaws.com:8080/pycozza
