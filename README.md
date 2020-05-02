@@ -7,6 +7,6 @@
 
 #### Build and deploy 
 * Command to build: mvn clean install 
-* Execute project: java -jar pycozza-0.0.5-SNAPSHOT.jar
+* Execute project: java -jar pycozza-0.0.6-SNAPSHOT.jar
 * Main access point is: http://localhost:8080/pycozza
 * The api can be called from: https://ec2-52-221-224-159.ap-southeast-1.compute.amazonaws.com:8080/pycozza
