@@ -42,11 +42,11 @@ public class UserController implements UserApi {
         if (userByEmail != null){
             if(userByEmail.getPassword().equals(user.getPassword())){
                 UserResponseModel userResponse = modelMapper.map(userByEmail, UserResponseModel.class);
-                return new ResponseEntity<>(userResponse, HttpStatus.FOUND);
+                return new ResponseEntity<>(userResponse, HttpStatus.OK);
             }
-            else return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            else return new ResponseEntity<>(null, HttpStatus.OK);
         }
-        else return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        else return new ResponseEntity<>(null, HttpStatus.OK);
 
     }
 
@@ -57,7 +57,7 @@ public class UserController implements UserApi {
         ObjectCreationSuccessResponse result = new ObjectCreationSuccessResponse();
         result.setId(persistUser.getId().toString());
         result.setStatus(HttpStatus.CREATED.value());
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }
