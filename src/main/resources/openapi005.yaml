@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Simple Inventory API
+  title: Pycozza API
   description: This is API for pizza ordering app for Pyco
   contact:
     email: 01ntanh9a3@gmail.com
@@ -145,18 +145,17 @@ paths:
           description: invalid input, object invalid
         "409":
           description: an existing item already exists
+
   /order/{email}:
     get:
       tags:
       - order
-      summary: get order
+      summary: get order history
       operationId: getOrderHistory
       parameters:
       - name: email
         in: path
         required: true
-        style: simple
-        explode: false
         schema:
           type: string
       responses:
@@ -165,9 +164,30 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/OrderListResponse'
+                $ref: '#/components/schemas/OrderListResponse'
+        "400":
+          description: bad input parameter
+
+
+  /order/email:
+    get:
+      tags:
+        - order
+      summary: get order
+      operationId: getOrderHistoryParam
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: search orders matching email
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderListResponse'
         "400":
           description: bad input parameter
 components:
@@ -180,11 +200,6 @@ components:
           items:
             $ref: '#/components/schemas/UserResponseModel'
     UserResponseModel:
-      required:
-      - address
-      - email
-      - fullName
-      - phone
       type: object
       properties:
         fullName:
@@ -194,6 +209,9 @@ components:
           type: string
         phone:
           type: string
+        address:
+          type: string
+
     CategoryListResponse:
       type: object
       properties:
@@ -213,6 +231,7 @@ components:
         name:
           type: string
           example: Example Category
+
     ProductListResponse:
       type: object
       properties:
@@ -220,13 +239,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductResponseModel'
+
     ProductResponseModel:
-      required:
-      - categoryId
-      - imgLink
-      - name
-      - price
-      - maxPrice
       type: object
       properties:
         id:
@@ -234,8 +248,6 @@ components:
         name:
           type: string
           example: Example Pizza
-        categoryId:
-          type: integer
         imgLink:
           type: string
         price:
@@ -244,6 +256,7 @@ components:
           type: integer
         description:
           type: string
+
     OrderListResponse:
       type: object
       properties:
@@ -251,6 +264,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrderResponseModel'
+
     OrderResponseModel:
       required:
       - cart
@@ -261,11 +275,19 @@ components:
         cart:
           type: array
           items:
-            $ref: '#/components/schemas/ProductResponseModel'
-        totalPrice:
-          type: integer
+            $ref: '#/components/schemas/OrderProductResponseModel'
+        email:
+          type: string
+        note:
+          type: string
         user:
           $ref: '#/components/schemas/UserResponseModel'
+        paymentMethod:
+          type: string
+        orderTime:
+          type: string
+        totalPrice:
+          type: integer
 
     CreateOrderRequest:
       type: object
@@ -273,16 +295,29 @@ components:
         cart:
           type: array
           items:
-            $ref: '#/components/schemas/ProductResponseModel'
+            $ref: '#/components/schemas/OrderProductResponseModel'
         email:
           type: string
         note:
           type: string
-        orderUserInfomation:
+        orderTime:
+          type: string
+        orderUserInformation:
           $ref: '#/components/schemas/UserResponseModel'
         paymentMethod:
           type: string
         totalPrice:
+          type: integer
+
+    OrderProductResponseModel:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Pizza Size M
+        price:
+          type: integer
+        quantity:
           type: integer
 
     CreateProductRequest:
@@ -299,6 +334,7 @@ components:
           type: integer
         description:
           type: string
+
     CreateUserRequest:
       type: object
       properties:
@@ -311,6 +347,7 @@ components:
         password:
           type: string
           format: password
+
     CheckUserRequest:
       type: object
       properties:
@@ -319,6 +356,7 @@ components:
         password:
           type: string
           format: password
+
     ObjectCreationSuccessResponse:
       type: object
       properties:
@@ -326,6 +364,7 @@ components:
           type: string
         status:
           type: integer
+
     ApiError:
       type: object
       properties:
@@ -335,6 +374,7 @@ components:
             $ref: '#/components/schemas/Fault'
         responseCode:
           type: integer
+
     Fault:
       type: object
       properties:

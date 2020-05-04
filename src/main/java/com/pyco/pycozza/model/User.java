@@ -2,11 +2,11 @@ package com.pyco.pycozza.model;
 
 
 import com.querydsl.core.annotations.QueryEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -26,14 +26,13 @@ public class User {
     @Setter
     private String phone;
 
-
     @Getter
     @Setter
     private String address;
 
     @Getter
     @Setter
-    @Indexed(unique=true)
+//    @Indexed(unique=true)
     private String email;
 
     @Getter

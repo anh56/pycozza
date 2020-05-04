@@ -1,7 +1,9 @@
 package com.pyco.pycozza.model;
 
 
+import com.pyco.pycozza.api.model.OrderProductResponseModel;
 import com.querydsl.core.annotations.QueryEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.types.ObjectId;
@@ -9,6 +11,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.annotation.Generated;
 import java.util.Date;
 import java.util.List;
 
@@ -22,13 +25,13 @@ public class Order {
 
     @Getter
     @Setter
-    @DBRef
-    private List<Product> product ;
+//    @DBRef
+    private List<OrderProductResponseModel> cart ;
 
     @Getter
     @Setter
-    @DBRef
-    private User user ;
+//    @DBRef
+    private User orderUserInformation ;
 
     @Getter
     @Setter
