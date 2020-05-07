@@ -50,14 +50,14 @@ public class OrderController implements OrderApi{
             List<Order> orderList = orderService.getOrderListByEmail(email);
             return buildOrderHistory(orderList);
         }
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     // order/email?email=
     @Override
     public ResponseEntity<OrderListResponse> getOrderHistoryParam(@NotNull @Valid String email) {
         if (email.equals(""))
-            return new ResponseEntity<>(null, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         else {
         List<Order> orderList = orderService.getOrderListByEmail(email);
         return buildOrderHistory(orderList);

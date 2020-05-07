@@ -123,6 +123,27 @@ paths:
         '400':
           description: bad input parameter
 
+  /user/auth/login:
+    post:
+      tags:
+        - user
+      operationId: loginUser
+      requestBody:
+        description: user email and password
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/CheckUserRequest'
+      responses:
+        '200':
+          description: user credential match
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseModelWithToken'
+        '400':
+          description: bad input parameter
+
   /order/add:
     post:
       summary: adds an order
@@ -212,6 +233,18 @@ components:
         address:
           type: string
 
+    UserResponseModelWithToken:
+      required:
+        - UserResponseModel
+        - token
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserResponseModel'
+        token:
+          type: string
+
+
     CategoryListResponse:
       type: object
       properties:
@@ -276,8 +309,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrderProductResponseModel'
-        email:
-          type: string
         note:
           type: string
         user:

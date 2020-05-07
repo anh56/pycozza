@@ -8,6 +8,9 @@ import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
 
 
 @QueryEntity
@@ -39,5 +42,33 @@ public class User {
     @Setter
     private String password;
 
+    @Getter
+    private  Collection<? extends GrantedAuthority> authorities;
 
+
+    public User(String fullName, String phone,
+                String address, String email,
+                String password, Collection<? extends GrantedAuthority> authorities) {
+        this.fullName = fullName;
+        this.phone = phone;
+        this.address = address;
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
+    }
+
+    public User() {
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", authorities=" + authorities +
+                '}';
+    }
 }

@@ -1,4 +1,4 @@
-//package com.pyco.pycozza.repo;
+//package com.pyco.pycozza.repository;
 //
 //import com.mongodb.BasicDBObject;
 //import com.mongodb.MongoClient;
