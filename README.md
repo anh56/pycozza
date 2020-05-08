@@ -7,6 +7,14 @@
 
 #### Build and deploy 
 * Command to build: mvn clean install
-* Execute project (in target folder after build): java -jar pycozza-0.0.9-SNAPSHOT.jar
+* Execute project (in target folder after build): java -jar pycozza-0.1.0-SNAPSHOT.jar
 * Main access point is: https://localhost:8080/pycozza
 * The api can be called from: https://ec2-52-221-224-159.ap-southeast-1.compute.amazonaws.com:8080/pycozza
+
+#### API
+* Api specifications can be found at: https://app.swaggerhub.com/apis/anh56/pycozza/0.0.5
+
+
+
+
+
