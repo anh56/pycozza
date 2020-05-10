@@ -43,7 +43,6 @@ public class UserService {
         else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             return userRepository.save(user);
-
         }
     }
 

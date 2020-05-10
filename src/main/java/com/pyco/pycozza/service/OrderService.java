@@ -18,7 +18,7 @@ public class OrderService {
     }
 
     public List<Order> getOrderListByEmail(String email){
-        return (List<Order>) orderRepository.findOrdersByEmail(email);
+        return orderRepository.findOrdersByEmail(email);
     }
 
 

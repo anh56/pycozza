@@ -6,9 +6,12 @@ import com.pyco.pycozza.api.model.CategoryListResponse;
 import com.pyco.pycozza.api.model.CategoryResponseModel;
 import com.pyco.pycozza.model.Category;
 import com.pyco.pycozza.service.CategoryService;
+import com.pyco.pycozza.util.ActionAspect;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,7 @@ import java.util.List;
 @Slf4j
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.HEAD, RequestMethod.OPTIONS})
 public class CategoryController implements CategoryApi{
+    private static Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
     @Autowired
     private CategoryService categoryService;
@@ -40,7 +44,7 @@ public class CategoryController implements CategoryApi{
         if (categoryList != null){
             categoryList.forEach(item -> categoryListResponse.addCategoriesItem(modelMapper.map(item, CategoryResponseModel.class)));
         }
-        return new ResponseEntity(categoryListResponse, HttpStatus.OK);
+        return new ResponseEntity<>(categoryListResponse, HttpStatus.OK);
     }
 
 

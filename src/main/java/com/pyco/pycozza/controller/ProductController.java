@@ -11,6 +11,8 @@ import com.pyco.pycozza.model.Product;
 import com.pyco.pycozza.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,9 @@ import java.util.List;
 @Slf4j
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.HEAD, RequestMethod.OPTIONS})
 public class ProductController implements ProductApi{
+
+    private static Logger logger = LoggerFactory.getLogger(ProductController.class);
+
 
     @Autowired
     private ProductService productService;

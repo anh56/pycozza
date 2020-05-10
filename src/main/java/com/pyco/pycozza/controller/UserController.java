@@ -11,7 +11,6 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
-import java.util.List;
 
 
 @RestController
@@ -43,32 +41,28 @@ public class UserController implements UserApi {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @GetMapping("/user/fb")
-    public Principal getUser(Principal user){
-        return user;
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
 
-    @GetMapping("")
-    public Page<User> getUserByPage(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
-        return userService.getUserByPage(page, size);
-    }
 
     @Override
     public ResponseEntity<UserResponseModel> checkUser(@Valid CheckUserRequest checkUserRequest) {
-        User user = modelMapper.map(checkUserRequest, User.class);
-        User userByEmail = userService.getUserByEmail(user.getEmail());
+//        User user = modelMapper.map(checkUserRequest, User.class);
+
+        User userByEmail = userService.getUserByEmail(checkUserRequest.getEmail());
         if (userByEmail != null){
-            if(userByEmail.getPassword().equals(user.getPassword())){
+   //         if(userByEmail.getPassword().equals(passwordEncoder.matches(user.getPassword() ))){
+            if(passwordEncoder.matches(checkUserRequest.getPassword(), userByEmail.getPassword())){
                 UserResponseModel userResponse = modelMapper.map(userByEmail, UserResponseModel.class);
                 return new ResponseEntity<>(userResponse, HttpStatus.OK);
             }
             else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
         else return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-
     }
-
 
 
     @Override
@@ -111,8 +105,37 @@ public class UserController implements UserApi {
         catch (AuthenticationException e){
             e.printStackTrace();
         }
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity("Wrong user name or passwrod", HttpStatus.BAD_REQUEST);
     }
+
+
+
+    @PostMapping("/api/login")
+    public ResponseEntity<String> login(@RequestBody CheckUserRequest checkUserRequest){
+//    logger.info("User trying to log in");
+        //Authentication authentication = null;
+        try{
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            checkUserRequest.getEmail(), checkUserRequest.getPassword()));
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            String token = generateToken(authentication);
+            return new ResponseEntity<String>(token, HttpStatus.OK);
+        }
+        catch (AuthenticationException e){
+            logger.info("Wrong user name or password");
+            e.printStackTrace();
+        }
+        return new ResponseEntity<String>(
+                "Wrong user name or password", HttpStatus.BAD_REQUEST);
+
+//        return userService.login(checkUserRequest);
+
+    }
+
+
 
     private String generateToken(Authentication authentication){
         final String JWT_SECRET = "pycozza-by-Hieu-Binh-Anh";
@@ -123,8 +146,15 @@ public class UserController implements UserApi {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        String token = Jwts.builder().
-                setSubject(userDetails.getUsername())
+        User userToDeliver = userService.getUserByEmail(userDetails.getUsername());
+
+        String token = Jwts.builder()
+                .setSubject(userDetails.getUsername())
+                .claim("fullName", userToDeliver.getFullName())
+                .claim("phone", userToDeliver.getPhone())
+                .claim("email", userToDeliver.getEmail())
+                .claim("address", userToDeliver.getAddress())
+//                .claim("password", userToDeliver.getPassword())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, JWT_SECRET)

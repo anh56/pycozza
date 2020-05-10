@@ -17,7 +17,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -57,6 +56,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors();
@@ -69,8 +69,23 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.authorizeRequests().antMatchers("/**").permitAll();
 //        http.oauth2ResourceServer().jwt();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.antMatcher("/order/*").addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService));
+        http.antMatcher("/order/email").addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService));
     }
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.cors();
+//        http.csrf().disable();
+////        http.authorizeRequests()
+////                .antMatchers("/api/login")
+////                .permitAll()
+////                .anyRequest()
+////                .authenticated();
+//        http.authorizeRequests().antMatchers("/**").permitAll();
+////        http.oauth2ResourceServer().jwt();
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+////        http.antMatcher("/order/email").addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService));
+//    }
 
 
 

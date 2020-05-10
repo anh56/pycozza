@@ -57,6 +57,14 @@ public class User {
         this.authorities = authorities;
     }
 
+    public User(String fullName, String phone, String address, String email, String password) {
+        this.fullName = fullName;
+        this.phone = phone;
+        this.address = address;
+        this.email = email;
+        this.password = password;
+    }
+
     public User() {
     }
 
