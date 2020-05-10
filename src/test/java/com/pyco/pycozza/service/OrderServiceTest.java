@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.util.ArrayList;
@@ -30,14 +31,6 @@ public class OrderServiceTest {
     private OrderRepository orderRepository;
 
     private static final String TEST_USER_EMAIL = "test@gmail.com";
-
-    //     public Order createOrder(Order order){
-    //        return orderRepository.save(order);
-    //    }
-    //
-    //    public List<Order> getOrderListByEmail(String email){
-    //        return (List<Order>) orderRepository.findOrdersByEmail(email);
-    //    }
 
     @BeforeEach
     public void inti(){

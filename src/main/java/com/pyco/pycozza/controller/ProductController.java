@@ -66,7 +66,12 @@ public class ProductController implements ProductApi{
 
     @Override
     public ResponseEntity<ObjectCreationSuccessResponse> addProduct(@Valid CreateProductRequest createProductRequest) {
-        return null;
+        Product product = modelMapper.map(createProductRequest, Product.class);
+        productService.addNewProduct(product);
+        ObjectCreationSuccessResponse objectCreationSuccessResponse = new ObjectCreationSuccessResponse();
+        objectCreationSuccessResponse.setId(String.valueOf(product.getId()));
+        objectCreationSuccessResponse.setStatus(200);
+        return   new ResponseEntity<ObjectCreationSuccessResponse>(objectCreationSuccessResponse, HttpStatus.OK);
     }
 
     @Override

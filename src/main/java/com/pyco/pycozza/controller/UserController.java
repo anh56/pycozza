@@ -100,7 +100,7 @@ public class UserController implements UserApi {
 
             userResponseModelWithToken.setToken(token);
 
-            return new ResponseEntity<UserResponseModelWithToken>(userResponseModelWithToken, HttpStatus.OK);
+            return new ResponseEntity<>(userResponseModelWithToken, HttpStatus.OK);
         }
         catch (AuthenticationException e){
             e.printStackTrace();
@@ -130,8 +130,6 @@ public class UserController implements UserApi {
         }
         return new ResponseEntity<String>(
                 "Wrong user name or password", HttpStatus.BAD_REQUEST);
-
-//        return userService.login(checkUserRequest);
 
     }
 
