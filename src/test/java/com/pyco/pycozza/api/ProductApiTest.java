@@ -51,16 +51,16 @@ public class ProductApiTest {
         Assert.assertEquals(1, productList.size());
     }
 
-//    @Test
-//    public void addProductReturnSuccessfulTest(){
-//        CreateProductRequest productRequest = new CreateProductRequest();
-//        productRequest.setName("test prod 3");
-//        productRequest.setCategoryId(2);
-//        productRequest.setImgLink("test Imng Link");
-//        productRequest.setDescription("test desc" );
-//        productRequest.setPrice(99);
-//        productController.addProduct(productRequest);
-//        Assert.assertEquals(1, productService.getProductByCategory(2).size());
-//
-//    }
+    @Test
+    public void addProductReturnSuccessfulTest(){
+        CreateProductRequest productRequest = new CreateProductRequest();
+        productRequest.setName("test prod 3");
+        productRequest.setCategoryId(2);
+        productRequest.setImgLink("test Imng Link");
+        productRequest.setDescription("test desc" );
+        productRequest.setPrice(99);
+        productController.addProduct(productRequest);
+        Assert.assertEquals(1, productService.getProductByCategory(2).size());
+
+    }
 }

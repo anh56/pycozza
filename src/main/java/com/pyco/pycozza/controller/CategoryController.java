@@ -48,17 +48,5 @@ public class CategoryController implements CategoryApi{
     }
 
 
-//
-//    // old
-//    @GetMapping("/v1/{key}")
-//    public Category getCategoryByKey(@PathVariable String key){
-//        return categoryService.getCategoryByKey(key);
-//    }
-//
-//    //old
-//    @PostMapping("/v1/add")
-//    public Category addNewCategory( @RequestParam int id, @RequestParam String name){
-//        return categoryService.addNewCategory(id, name);
-//    }
 
 }

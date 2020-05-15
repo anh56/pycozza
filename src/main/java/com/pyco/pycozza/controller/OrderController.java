@@ -82,50 +82,6 @@ public class OrderController implements OrderApi{
 
 
 
-//        private ResponseEntity<OrderListResponse> buildOrderListResponse(List<OrderResponse> orderList){
-//        OrderListResponse orderListResponse = new OrderListResponse();
-//        orderListResponse.setOrders();
-//    }
-
-//    private ResponseEntity<OrderResponseModel> buildOrderResponse(){}
-//    private ResponseEntity<ProductResponseModel> buidProductResponse(){}
-//private ResponseEntity<ProductListResponse> buildProductListResponse(List<Product> productList){
-//    ProductListResponse productListResponse = new ProductListResponse();
-//    if (productList != null){
-//        productList.forEach(item -> productListResponse.addProductsItem(modelMapper.map(item, ProductResponseModel.class)));
-//    }
-//    return new ResponseEntity<>(productListResponse, HttpStatus.OK);
-//}
-
-
-    //    private Order buildOrder(CreateOrderRequest createOrderRequest){
-//        Order newOrder = new Order();
-//
-//        List<Product> productList = new ArrayList<Product>();
-//        List<OrderProductResponseModel> productResponseModelList = createOrderRequest.getCart();
-//
-//        User user = new User();
-//        UserResponseModel userInstance = createOrderRequest.getOrderUserInformation();
-//
-//        productResponseModelList.forEach(item -> productList.add(modelMapper.map(item, Product.class)));
-//
-//        newOrder.setCart(productList);
-//
-//        user.setFullName(userInstance.getFullName());
-//        user.setAddress(userInstance.getAddress());
-//        user.setPhone(userInstance.getPhone());
-//
-//        newOrder.setOrderUserInformation(user);
-//
-//        newOrder.setEmail(createOrderRequest.getEmail());
-//        newOrder.setNote(createOrderRequest.getNote());
-//        newOrder.setOrderTime(createOrderRequest.getOrderTime());
-//        newOrder.setPaymentMethod(createOrderRequest.getPaymentMethod());
-//        newOrder.setTotalPrice(createOrderRequest.getTotalPrice());
-//
-//
-//        return newOrder;
-//    }
 
 
 }

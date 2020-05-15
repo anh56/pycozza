@@ -72,45 +72,5 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
         http.antMatcher("/order/email").addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService));
     }
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.cors();
-//        http.csrf().disable();
-////        http.authorizeRequests()
-////                .antMatchers("/api/login")
-////                .permitAll()
-////                .anyRequest()
-////                .authenticated();
-//        http.authorizeRequests().antMatchers("/**").permitAll();
-////        http.oauth2ResourceServer().jwt();
-//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-////        http.antMatcher("/order/email").addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService));
-//    }
 
-
-
-
-
-
-    //    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(appUserDetailService);
-//    }
-
-
-    //
-//    @Override
-//    public void configure(ClientDetailsServiceConfigurer)
-//
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(Arrays.asList("*"));
-//        configuration.setAllowedMethods(Arrays.asList("*"));
-//        configuration.setAllowedHeaders(Arrays.asList("*"));
-//        configuration.setExposedHeaders(Arrays.asList("*"));
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
 }

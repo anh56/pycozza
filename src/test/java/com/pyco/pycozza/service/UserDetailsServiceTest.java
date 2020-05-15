@@ -29,9 +29,6 @@ public class UserDetailsServiceTest {
     private MongoTemplate mongoTemplate;
 
 
-//    @BeforeEach
-//    public void init(){}
-//
     @Test
     public void loadUserDetailsTest(){
         UserDetails userDetails = userDetailsService.loadUserByUsername(TEST_EMAIl);
